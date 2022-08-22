@@ -79,11 +79,11 @@ const path = require('path');
   // Root Endpoint
   // Displays a simple message to the user. Edited to add new query
   app.get("/", async (req, res) => {
-    //res.send("try GET /filteredimage?image_url={{}}&imageQual={{1-100}}")
-    var options = {
-      root: path.join(__dirname)
-    };
-    res.sendFile('index.html', options)
+    res.send("try GET /filteredimage?image_url={{}}&imageQual={{1-100}}")
+    // var options = {
+    //   root: path.join(__dirname)
+    // };
+    // res.sendFile('index.html', options)
   });
 
   //Added by me: Ohaneme Kingsley. To redirect all other request types.
