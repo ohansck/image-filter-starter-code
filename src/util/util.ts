@@ -4,11 +4,14 @@ import Jimp = require("jimp");
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
 // returns the absolute path to the local image
-// INPUTS
+// INPUTS modified by Ohamene Kingsley github.com/ohansck
 //    inputURL: string - a publicly accessible url to an image file
+//    imageQUality: number - an interger to set the desired output image quality
 // RETURNS
 //    an absolute path to a filtered image locally saved file
-export async function filterImageFromURL(inputURL: string): Promise<string> {
+// Edited by Ohaneme Kingsley. User can set quality of filtered image.
+// Default quality set at 60
+export async function filterImageFromURL(inputURL: string, imageQuality: number): Promise<string> {
   return new Promise(async (resolve, reject) => {
     try {
       const photo = await Jimp.read(inputURL);
@@ -16,12 +19,12 @@ export async function filterImageFromURL(inputURL: string): Promise<string> {
         "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
       await photo
         .resize(256, 256) // resize
-        .quality(60) // set JPEG quality
+        .quality(imageQuality) // set JPEG quality. Edited by github.com/ohansck
         .greyscale() // set greyscale
         .write(__dirname + outpath, (img) => {
           resolve(__dirname + outpath);
         });
-    } catch (error) {
+    } catch (error: any) {
       reject(error);
     }
   });
