@@ -29,24 +29,7 @@ const path = require('path');
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-  // app.get('/filteredimage', async (req, res) => {
-  //   const image_URL = req.query.image_url;
-  //   console.log(typeof image_URL, image_URL)
-  //   if (image_URL) {
-  //     if (image_URL !== '') {
-  //       const filterImagePath = await filterImageFromURL(image_URL)
-  //       console.log(filterImagePath)
-  //       res.status(200).sendFile(filterImagePath, () => {
-  //         deleteLocalFiles([filterImagePath])
-  //       })
-  //     } else {
-  //       res.status(406).send('Please enter image URL')
-  //     }
-  //   } else {
-  //     res.status(406).send('Invalid Query Key')
-  //   }
-  // })
-  //Endpoint recieves two queries. Image URL and desired output quality
+
   app.get('/filteredimage', async (req, res) => {
     let image_URL = req.query.image_url;
     //Takes the first image url in the event of same multiple queries
@@ -79,7 +62,7 @@ const path = require('path');
           })
           //if promise rejected
           .catch((error) => {
-            console.log(error.message)
+            //console.log(error.message)
             res.status(404).send(`Invalid Query Value. Could not fetch resource. Check image URL`)
           })
       } else {
