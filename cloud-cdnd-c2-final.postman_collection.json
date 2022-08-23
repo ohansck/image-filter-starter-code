@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{HOST}}/filteredimage?image_url=https://images.peklxels.com/photos/2097628/pexels-photo-2097628.jpeg?auto=compress%26cs=tinysrgb%26w=1260%26h=750%26dpr=1&imageQual=10",
+					"raw": "http://{{HOST}}/filteredimage?image_url=https://images.pexels.com/photos/2097628/pexels-photo-2097628.jpeg?auto=compress%26cs=tinysrgb%26w=1260%26h=750%26dpr=1&imageQual=10",
 					"protocol": "http",
 					"host": [
 						"{{HOST}}"
@@ -22,7 +22,7 @@
 					"query": [
 						{
 							"key": "image_url",
-							"value": "https://images.peklxels.com/photos/2097628/pexels-photo-2097628.jpeg?auto=compress%26cs=tinysrgb%26w=1260%26h=750%26dpr=1"
+							"value": "https://images.pexels.com/photos/2097628/pexels-photo-2097628.jpeg?auto=compress%26cs=tinysrgb%26w=1260%26h=750%26dpr=1"
 						},
 						{
 							"key": "imageQual",
@@ -38,7 +38,14 @@
 			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg Copy 2",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
 				"url": {
 					"raw": "http://{{HOST}}/filteredimage?image_url=https://images.pexels.com/photos/2097628/pexels-photo-2097628.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1&imageQual=75",
 					"protocol": "http",
@@ -83,7 +90,14 @@
 			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg Copy 3",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
 				"url": {
 					"raw": "http://{{HOST}}/filteredimage?imageQual=98&image_url=https://cdn.cnn.com/cnnnext/dam/assets/220808155527-02-hellen-obiri-large-169.jpg",
 					"protocol": "http",
@@ -112,7 +126,13 @@
 			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
 				"url": {
 					"raw": "http://{{HOST}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 					"protocol": "http",
@@ -133,23 +153,43 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg Copy 4",
+			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg Copy 5",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"kingsley\",\r\n    \"role\":\"cloud dev\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://{{HOST}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+					"raw": "http://{{HOST}}/login",
 					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
-						"filteredimage"
+						"login"
 					],
 					"query": [
 						{
-							"key": "image_url",
-							"value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
 						}
 					]
 				}
@@ -157,6 +197,16 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoia2luZ3NsZXkiLCJyb2xlIjoiY2xvdWQgZGV2IiwiaWF0IjoxNjYxMjgzNTIxfQ.UnoWUuxNKNK9fDgbjFRVrxaeMFa3ixjLcpM8GPTEDL8",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -180,7 +230,7 @@
 	"variable": [
 		{
 			"key": "HOST",
-			"value": "localhost:8082",
+			"value": "image-filter-starter-code-dev54321.us-east-1.elasticbeanstalk.com",
 			"type": "string"
 		}
 	]
