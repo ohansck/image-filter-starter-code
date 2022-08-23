@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { filterImageFromURL, deleteLocalFiles } from './util/util';
+import { requireAuth, generateJWT } from './auth'
 const path = require('path');
 
 (async () => {
@@ -30,7 +31,7 @@ const path = require('path');
 
   /**************************************************************************** */
 
-  app.get('/filteredimage', async (req, res) => {
+  app.get('/filteredimage', requireAuth, async (req, res) => {
     let image_URL = req.query.image_url;
     //Takes the first image url in the event of same multiple queries
     if (typeof image_URL === 'object') {
@@ -74,16 +75,22 @@ const path = require('path');
       res.status(400).send('Invalid Query Key. Try GET /filteredimage?image_url={{}}&imageQual={{1-100}}')
     }
   })
+
+  //Login, where token is generated from body parameters
+  app.post('/login', (req, res) => {
+    const { name, role } = req.body;
+    const tokenJWT = generateJWT({ name: name, role: role });
+    res.set('Authorisation', `Bearer ${tokenJWT}`)
+    res.send({ name: name, role: role, token: tokenJWT })
+  })
   //! END @TODO1
 
   // Root Endpoint
   // Displays a simple message to the user. Edited to add new query
-  app.get("/", async (req, res) => {
-    //res.send("try GET /filteredimage?image_url={{}}&imageQual={{1-100}}")
-    var options = {
-      root: path.join(__dirname)
-    };
-    res.sendFile('index.html', options)
+  app.get("/", (req, res) => {
+
+    res.send("try GET /filteredimage?image_url={{}}&imageQual={{1-100}}")
+
   });
 
   //Added by me: Ohaneme Kingsley. To redirect all other request types.

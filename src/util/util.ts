@@ -24,7 +24,7 @@ export async function filterImageFromURL(inputURL: string, imageQuality: number)
         .write(__dirname + outpath, (img) => {
           resolve(__dirname + outpath);
         });
-    } catch (error: any) {
+    } catch (error) {
       reject(error);
     }
   });
