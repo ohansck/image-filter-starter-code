@@ -32,18 +32,19 @@ const path = require('path');
   /**************************************************************************** */
 
   app.get('/filteredimage', requireAuth, async (req, res) => {
-    let image_URL = req.query.image_url;
+    let image_URL: any = req.query.image_url;
+    //image_URL is type 'any' beacuse req.query.image_url can be string or object
     //Takes the first image url in the event of same multiple queries
     if (typeof image_URL === 'object') {
       image_URL = image_URL[0]
     }
 
     //Check if query 'imageQual' exists
-    let quality = req.query.imageQual;
-
+    let qualityString: any = req.query.imageQual;
+    let quality: number;
     //Set image quality limits 10 >= quality <= 100
-    if (quality) {
-      quality = parseInt(quality.toString());
+    if (qualityString) {
+      quality = parseInt(qualityString.toString());
       if (quality < 10) { quality = 10; }
       else if (quality >= 100) { quality = 100 }
     } else {
@@ -53,7 +54,7 @@ const path = require('path');
     if (image_URL) {
       if (image_URL !== '') {
         //Prevents processing imageQual query as part of image url
-        let image__URL = image_URL.split('&imageQual=')[0]
+        let image__URL: string = image_URL.split('&imageQual=')[0]
         await filterImageFromURL(image__URL, quality)
           //if promise resolved
           .then((filterImagePath) => {
@@ -79,7 +80,7 @@ const path = require('path');
   //Login, where token is generated from body parameters
   app.post('/login', (req, res) => {
     const { name, role } = req.body;
-    const tokenJWT = generateJWT({ name: name, role: role });
+    const tokenJWT: string = generateJWT({ name: name, role: role });
     res.set('Authorisation', `Bearer ${tokenJWT}`)
     res.send({ name: name, role: role, token: tokenJWT })
   })

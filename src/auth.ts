@@ -17,12 +17,12 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
     }
 
 
-    const token_bearer = req.headers.authorization.split(' ');
+    const token_bearer: string[] = req.headers.authorization.split(' ');
     if (token_bearer.length != 2) {
         return res.status(401).send({ message: 'Malformed token.' });
     }
 
-    const token = token_bearer[1];
+    const token: string = token_bearer[1];
 
     return jwt.verify(token, config.jwt.secret, (err: any, decoded: any) => {
         if (err) {
